@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_d&amp;dcompanion" default="compile.module.d&amp;dcompanion">
+  <dirname property="module.d&amp;dcompanion.basedir" file="${ant.file.module_d&amp;dcompanion}"/>
+  
+  <property name="module.jdk.home.d&amp;dcompanion" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.d&amp;dcompanion" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.d&amp;dcompanion" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.d&amp;dcompanion" value="-encoding UTF-8 -source 1.6 ${compiler.args}"/>
+  
+  <property name="d&amp;dcompanion.output.dir" value="${module.d&amp;dcompanion.basedir}/out/production/D&amp;Dcompanion"/>
+  <property name="d&amp;dcompanion.testoutput.dir" value="${module.d&amp;dcompanion.basedir}/out/test/D&amp;Dcompanion"/>
+  
+  <path id="d&amp;dcompanion.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="d&amp;dcompanion.module.production.classpath">
+    <path refid="${module.jdk.classpath.d&amp;dcompanion}"/>
+  </path>
+  
+  <path id="d&amp;dcompanion.runtime.production.module.classpath">
+    <pathelement location="${d&amp;dcompanion.output.dir}"/>
+  </path>
+  
+  <path id="d&amp;dcompanion.module.classpath">
+    <path refid="${module.jdk.classpath.d&amp;dcompanion}"/>
+    <pathelement location="${d&amp;dcompanion.output.dir}"/>
+  </path>
+  
+  <path id="d&amp;dcompanion.runtime.module.classpath">
+    <pathelement location="${d&amp;dcompanion.testoutput.dir}"/>
+    <pathelement location="${d&amp;dcompanion.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.d&amp;dcompanion">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.d&amp;dcompanion">
+    <patternset refid="excluded.from.module.d&amp;dcompanion"/>
+  </patternset>
+  
+  <path id="d&amp;dcompanion.module.sourcepath">
+    <dirset dir="${module.d&amp;dcompanion.basedir}">
+      <include name="src"/>
+      <include name="gen"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.d&amp;dcompanion" depends="compile.module.d&amp;dcompanion.production,compile.module.d&amp;dcompanion.tests" description="Compile module D&amp;Dcompanion"/>
+  
+  <target name="compile.module.d&amp;dcompanion.production" depends="register.custom.compilers" description="Compile module D&amp;Dcompanion; production classes">
+    <mkdir dir="${d&amp;dcompanion.output.dir}"/>
+    <javac2 destdir="${d&amp;dcompanion.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.d&amp;dcompanion}/javac">
+      <compilerarg line="${compiler.args.d&amp;dcompanion}"/>
+      <bootclasspath refid="d&amp;dcompanion.module.bootclasspath"/>
+      <classpath refid="d&amp;dcompanion.module.production.classpath"/>
+      <src refid="d&amp;dcompanion.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.d&amp;dcompanion"/>
+    </javac2>
+    
+    <copy todir="${d&amp;dcompanion.output.dir}">
+      <fileset dir="${module.d&amp;dcompanion.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.d&amp;dcompanion.basedir}/gen">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.d&amp;dcompanion.tests" depends="register.custom.compilers,compile.module.d&amp;dcompanion.production" description="compile module D&amp;Dcompanion; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.d&amp;dcompanion" description="cleanup module">
+    <delete dir="${d&amp;dcompanion.output.dir}"/>
+    <delete dir="${d&amp;dcompanion.testoutput.dir}"/>
+  </target>
+</project>

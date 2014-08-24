@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name"><![CDATA[D&Dcompanion]]></string>
+    <string name="Dice">Dice Roll Tool</string>
+    <string name="RollD4">Roll D4</string>
+    <string name="RollD6">Roll D6</string>
+    <string name="RollD8">Roll D8</string>
+    <string name="RollD10">Roll D10</string>
+    <string name="RollD100">Roll D100</string>
+    <string name="RollD12">Roll D12</string>
+    <string name="RollD20">Roll D20</string>
+    <string name="DiceRollToolBtn">Dice Roll Tool</string>
+    <string name="MainMenu">Main Menu</string>
+</resources>
