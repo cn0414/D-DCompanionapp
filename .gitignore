@@ -24,6 +24,4 @@ proguard/
 
 # Intellij IDEA specific files
 *.iml
-.idea/
-
-.gitignore
+.idea
